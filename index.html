@@ -126,6 +126,47 @@
         </div>
       </div>
 
+      <!-- MISSÃO HOME -->
+      <div class="section" style="background:var(--surface);border-top:1px solid var(--line);border-bottom:1px solid var(--line);">
+        <div class="mission-grid">
+          <div data-reveal>
+            <div class="about-section-label">O Olhar Diferenciado</div>
+            <h2 class="about-title" style="margin-bottom:24px;">O NATURAL<br><em>EM FOCO</em></h2>
+            <p style="color:var(--silver);font-size:1.05rem;line-height:1.8;font-weight:300;">Capturando a essência bruta da fauna, flora e dos momentos sociais sem artifícios. Esqueça poses forçadas — o mundo real é onde a verdadeira arte acontece.</p>
+            <button class="btn-outline" style="margin-top: 36px;" onclick="document.getElementById('nav-about').click()">Conheça minha história →</button>
+          </div>
+          <div class="mission-img-wrap" data-reveal data-delay="1">
+            <img src="src/assets/img/jordao01.jpg" alt="Jordão Nunes fotografando">
+            <div class="mission-img-backdrop"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ESPECIALIDADES HOME -->
+      <div class="section">
+        <div style="text-align:center;margin-bottom:60px;display:flex;flex-direction:column;align-items:center;" data-reveal>
+          <div class="about-section-label" style="justify-content:center;margin-bottom:12px;">Especialidades</div>
+          <h2 class="about-title">ÁREAS DE <em>ATUAÇÃO</em></h2>
+        </div>
+        <div class="services-grid">
+          <div class="service-card" data-reveal data-delay="1">
+            <div class="service-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2L4 10a8 8 0 1016 0L12 2z"/></svg></div>
+            <h3 class="service-title">Vida Selvagem</h3>
+            <p class="service-desc">Expedições na floresta amazônica documentando aves, répteis e toda a precisão da biodiversidade nativa.</p>
+          </div>
+          <div class="service-card" data-reveal data-delay="2">
+            <div class="service-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path><circle cx="12" cy="13" r="4"></circle></svg></div>
+            <h3 class="service-title">Eventos Sociais</h3>
+            <p class="service-desc">Cobertura cirúrgica e discreta onde os sentimentos reais falam mais alto do que qualquer roteiro pré-definido.</p>
+          </div>
+          <div class="service-card" data-reveal data-delay="3">
+            <div class="service-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg></div>
+            <h3 class="service-title">Projetos Documentais</h3>
+            <p class="service-desc">Séries fotográficas que documentam histórias, ambientes e a cultura rica de todo o estado do Pará.</p>
+          </div>
+        </div>
+      </div>
+
       <div class="filter-bar">
         <div class="filter-inner">
           <span class="nav-link gal-filter" id="nature">Natureza</span>
@@ -133,15 +174,17 @@
         </div>
       </div>
 
-      <div class="section" style="padding-top:28px;">
-        <div id="gallery-header" style="margin-bottom:28px;display:none;">
+      <div class="section" style="padding-top:28px; padding-left:0; padding-right:0; overflow:hidden;">
+        <div id="gallery-header" style="margin-bottom:28px;display:none;padding:0 56px;">
           <div
             style="font-family:var(--mono);font-size:9px;letter-spacing:0.3em;color:var(--gold);text-transform:uppercase;margin-bottom:7px;">
             Seleção</div>
           <h2 style="font-family:var(--display);font-weight:700;font-size:clamp(1.8rem,4vw,2.8rem);line-height:1;">
             DESTAQUES</h2>
         </div>
-        <div class="gallery-grid" id="home-gallery-grid"></div>
+        <div class="marquee-wrapper">
+          <div id="home-gallery-grid"></div>
+        </div>
       </div>
     </section>
 

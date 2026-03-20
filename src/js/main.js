@@ -263,10 +263,13 @@ document.addEventListener('DOMContentLoaded', () => {
         filtered = allPosts.filter(p => p.cat === category);
       }
 
-      filtered.forEach((post, i) => {
+      const isHome = grid.id === 'home-gallery-grid';
+      const itemsToRender = isHome ? [...filtered, ...filtered] : filtered;
+
+      itemsToRender.forEach((post, i) => {
         const item = buildGalItem(post);
         item.style.transitionDelay = `${(i % 6) * 0.05}s`;
-        item.addEventListener('click', () => openLightbox(post, filtered, i));
+        item.addEventListener('click', () => openLightbox(post, itemsToRender, i));
         grid.appendChild(item);
         revealObs.observe(item);
       });
