@@ -173,7 +173,7 @@ body{background:var(--night);color:var(--white);font-family:var(--body);font-wei
 
 /* Marquee Animation */
 .marquee-wrapper{width:100%;overflow:hidden;padding:10px 0}
-#home-gallery-grid{display:flex;width:max-content;gap:16px;animation:marquee 40s linear infinite;min-height:360px;transition:opacity 0.4s ease}
+#home-gallery-grid{display:flex;width:max-content;gap:16px;animation:marquee 80s linear infinite;min-height:360px;transition:opacity 0.4s ease}
 #home-gallery-grid:hover{animation-play-state:paused}
 #home-gallery-grid.loading{opacity:0.4;pointer-events:none}
 #home-gallery-grid .gal-item{width:280px;height:360px;flex-shrink:0}

@@ -266,6 +266,12 @@ document.addEventListener('DOMContentLoaded', () => {
       const isHome = grid.id === 'home-gallery-grid';
       const itemsToRender = isHome ? [...filtered, ...filtered] : filtered;
 
+      // Mantém a velocidade constante calculando o duration baseado no número de itens
+      if (isHome && filtered.length > 0) {
+        const secondsPerItem = 8; // Aumente para deixar mais lento
+        grid.style.animationDuration = `${filtered.length * secondsPerItem}s`;
+      }
+
       itemsToRender.forEach((post, i) => {
         const item = buildGalItem(post);
         item.style.transitionDelay = `${(i % 6) * 0.05}s`;
