@@ -27,6 +27,9 @@ RUN playwright install --with-deps chromium
 # Copia o restante dos arquivos do projeto
 COPY . .
 
+# Corrige permissões para o Nginx ler os arquivos perfeitamente
+RUN chmod -R 755 /app
+
 # Remove a configuração padrão do Nginx e adiciona a nossa
 RUN rm /etc/nginx/sites-enabled/default
 COPY nginx.conf /etc/nginx/conf.d/default.conf
