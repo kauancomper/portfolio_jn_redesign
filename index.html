@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Jordão Nunes — Fotógrafo de Natureza & Vida Selvagem</title>
+  <meta name="description"
+    content="Portfólio de Jordão Nunes Farias, fotógrafo de natureza e vida selvagem em Marabá-PA." />
+  <meta name="referrer" content="no-referrer" />
+  <link rel="icon" type="image/svg+xml"
+    href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='4' fill='%23060608'/%3E%3Ctext x='32' y='46' font-family='serif' font-size='36' font-weight='bold' fill='%23C9A84C' text-anchor='middle'%3EJN%3C/text%3E%3C/svg%3E" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600&family=DM+Sans:opsz,wght@9..40,200;9..40,300;9..40,400;9..40,500&family=Space+Mono:wght@400;700&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="src/css/main.css" />
+</head>
+
+<body>
+
+  <div class="grain"></div>
+  <div class="cursor-dot" id="cursor-dot"></div>
+  <div class="cursor-ring" id="cursor-ring"></div>
+  <div class="page-progress">
+    <div class="page-progress-bar" id="page-progress-bar"></div>
+  </div>
+
+  <!-- SPLASH -->
+  <div id="splash" class="splash">
+    <svg class="splash-svg" viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg"
+      style="width:72px;height:72px;margin-bottom:40px;">
+      <path d="M18 14 L18 54 Q18 67 30 67 Q42 67 42 54 L42 49"
+        style="stroke:var(--gold);stroke-width:2;fill:none;stroke-dasharray:220;stroke-dashoffset:220;animation:draw-svg 1.5s cubic-bezier(0.16,1,0.3,1) forwards 0.1s;" />
+      <path d="M54 14 L54 67"
+        style="stroke:var(--gold);stroke-width:2;fill:none;stroke-dasharray:80;stroke-dashoffset:80;animation:draw-svg 0.8s cubic-bezier(0.16,1,0.3,1) forwards 0.6s;" />
+      <path d="M54 14 L70 67"
+        style="stroke:var(--gold);stroke-width:2;fill:none;stroke-dasharray:80;stroke-dashoffset:80;animation:draw-svg 0.8s cubic-bezier(0.16,1,0.3,1) forwards 0.7s;" />
+      <path d="M54 41 L68 41"
+        style="stroke:var(--gold);stroke-width:2;fill:none;stroke-dasharray:30;stroke-dashoffset:30;animation:draw-svg 0.5s cubic-bezier(0.16,1,0.3,1) forwards 1s;" />
+    </svg>
+    <div class="splash-inner">
+      <div class="splash-brand">Jordão Nunes</div>
+      <div class="splash-text">
+        <span class="splash-label">f/2.8</span>
+        <div class="splash-bar">
+          <div class="splash-progress" id="splash-progress"></div>
+        </div>
+        <span class="splash-label" id="splash-pct">0%</span>
+      </div>
+    </div>
+  </div>
+
+  <button class="scroll-top" id="scroll-top" aria-label="Topo">↑</button>
+  <a href="https://wa.me/5594992112727?text=Olá%20Jordão!%20Vim%20pelo%20seu%20portfólio" target="_blank" class="wa-fab"
+    id="wa-fab" aria-label="WhatsApp">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
+      <path
+        d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347zM12 0C5.373 0 0 5.373 0 12c0 2.062.525 4.001 1.446 5.691L0 24l6.473-1.425A11.95 11.95 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 0 1-4.989-1.362l-.357-.212-3.702.815.876-3.606-.233-.371A9.769 9.769 0 0 1 2.182 12C2.182 6.57 6.57 2.182 12 2.182c5.43 0 9.818 4.388 9.818 9.818 0 5.43-4.388 9.818-9.818 9.818z" />
+    </svg>
+  </a>
+
+  <header>
+    <nav class="nav" id="nav">
+      <div class="nav-logo" id="logo">
+        <img src="src/assets/img/logo%20jn.png" alt="Logo JN">
+        JORDÃO NUNES
+      </div>
+      <div class="nav-links" id="nav-menu">
+        <span class="nav-link active" id="nav-home">Início</span>
+        <span class="nav-link" id="nav-portfolio">Portfólio</span>
+        <span class="nav-link" id="nav-about">Sobre</span>
+        <span class="nav-link" id="nav-contact">Contato</span>
+      </div>
+      <div style="display:flex;gap:50px;align-items:center;">
+        <button class="hamburger" id="hamburger" aria-label="Menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </nav>
+    <div class="mobile-overlay" id="mobile-overlay">
+      <span class="nav-link" id="mob-home">Início</span>
+      <span class="nav-link" id="mob-portfolio">Portfólio</span>
+      <span class="nav-link" id="mob-about">Sobre</span>
+      <span class="nav-link" id="mob-contact">Contato</span>
+      <a href="https://wa.me/5594992112727" class="nav-inquire" style="text-decoration:none;margin-top:12px;"
+        target="_blank">Agendar</a>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- HOME -->
+    <section id="home-page" class="page active">
+      <div class="hero">
+        <div class="hero-bg"><img src="src/assets/img/jn-3d.png" alt="Fotografia Amazônia"></div>
+        <div class="bokeh-container" id="bokeh-container"></div>
+        <div class="viewfinder" id="viewfinder">
+          <div class="vf-corner vf-tl"></div>
+          <div class="vf-corner vf-tr"></div>
+          <div class="vf-corner vf-bl"></div>
+          <div class="vf-corner vf-br"></div>
+        </div>
+        <div class="hero-content">
+          <div class="hero-eyebrow" data-reveal>Marabá, Pará · Amazônia</div>
+          <h1 class="hero-grand" data-reveal data-delay="1">JORDÃO<br>NUNES</h1>
+          <span class="hero-dimensions" data-reveal data-delay="2">Fotógrafo</span>
+          <p class="hero-desc" data-reveal data-delay="3">A ciência do olhar técnico aplicada à<br>biodiversidade
+            amazônica. Detalhes invisíveis<br>capturados com precisão cirúrgica.</p>
+          <div class="hero-cta-group" data-reveal data-delay="4">
+            <button class="btn-gold" id="hero-portfolio-btn"><span>Ver Portfólio</span></button>
+            <button class="btn-outline" id="hero-contact-btn">Agendar Sessão →</button>
+          </div>
+        </div>
+        <div class="iso-container" data-reveal data-delay="3">
+          <img src="https://images.unsplash.com/photo-1634507000790-a35f52479e0a?q=80&w=2670&auto=format&fit=crop"
+            id="hero-iso-img" alt="JN 3D studio">
+        </div>
+        <div class="exif-hud">
+          <span class="exif-item">f/2.80</span>
+          <span class="exif-item">ISO 400</span>
+          <span class="exif-item">1/1000s</span>
+          <span class="exif-item">400mm</span>
+        </div>
+      </div>
+
+      <div class="filter-bar">
+        <div class="filter-inner">
+          <span class="nav-link gal-filter" id="nature">Natureza</span>
+          <span class="nav-link gal-filter" id="social">Social</span>
+        </div>
+      </div>
+
+      <div class="section" style="padding-top:28px;">
+        <div id="gallery-header" style="margin-bottom:28px;display:none;">
+          <div
+            style="font-family:var(--mono);font-size:9px;letter-spacing:0.3em;color:var(--gold);text-transform:uppercase;margin-bottom:7px;">
+            Seleção</div>
+          <h2 style="font-family:var(--display);font-weight:700;font-size:clamp(1.8rem,4vw,2.8rem);line-height:1;">
+            DESTAQUES</h2>
+        </div>
+        <div class="gallery-grid" id="home-gallery-grid"></div>
+      </div>
+    </section>
+
+    <!-- PORTFOLIO -->
+    <section id="portfolio-page" class="page">
+      <div class="portfolio-header">
+        <div
+          style="font-family:var(--mono);font-size:9px;letter-spacing:0.3em;color:var(--gold);text-transform:uppercase;margin-bottom:10px;"
+          data-reveal>Trabalhos</div>
+        <h2
+          style="font-family:var(--display);font-weight:700;font-size:clamp(2.4rem,7vw,5rem);line-height:0.9;margin-bottom:8px;"
+          data-reveal>
+          PORTFÓLIO <span style="font-style:italic;font-weight:300;color:var(--gold);">Completo</span>
+        </h2>
+        <p style="font-family:var(--mono);font-size:9px;letter-spacing:0.15em;color:var(--silver);text-transform:uppercase;"
+          data-reveal>Todas as fotografias em ordem de publicação</p>
+      </div>
+      <div class="section" style="padding-top:0;">
+        <div class="gallery-grid portfolio-all-grid" id="portfolio-grid"></div>
+      </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section id="about-page" class="page">
+      <div class="section" style="padding-top:120px;">
+        <div class="about-grid">
+          <div data-reveal>
+            <div class="about-photo-wrap">
+              <img src="src/assets/img/jordao01.jpg" alt="Jordão Nunes Farias — Fotógrafo">
+              <div class="about-badge">Jordão Nunes Farias</div>
+            </div>
+          </div>
+          <div>
+            <div class="about-section-label" data-reveal>Sobre o fotógrafo</div>
+            <h2 class="about-title" data-reveal data-delay="1">O OLHAR <em>Técnico</em></h2>
+            <p class="about-subtitle" data-reveal data-delay="2">Fotógrafo de Natureza & Vida Selvagem · Marabá, PA</p>
+            <div class="about-text-block" data-reveal data-delay="2">
+              <p style="margin-bottom:14px;">Jordão Nunes Farias é um fotógrafo radicado em Marabá, no coração do Pará.
+                Especialista em fotografia de vida selvagem e equipado com tecnologia de ponta, seu trabalho busca
+                revelar detalhes que muitas vezes passam despercebidos ao olho nu.</p>
+              <p>Sua precisão técnica já rendeu reconhecimentos internacionais, incluindo seleções para a prestigiada
+                galeria da <strong>National Geographic (Your Shot)</strong>.</p>
+            </div>
+            <div class="about-text" data-reveal data-delay="3">
+              <p style="margin-bottom:14px;">Atuando profissionalmente desde 2020, Jordão consolidou seu nome como uma
+                referência na documentação visual da fauna e flora amazônica. Sua abordagem une a paciência do
+                observador de aves com a exatidão da fotografia técnica aérea e paisagística.</p>
+              <p>Seja capturando o voo preciso de uma ave rara no Rio Itacaiúnas ou a geometria complexa da arquitetura
+                de Marabá, cada disparo é uma masterclass em fidelidade de cores e nitidez extrema.</p>
+            </div>
+            <div class="stats-grid" data-reveal data-delay="4">
+              <div class="stat-card">
+                <div class="stat-label">Desde</div>
+                <div class="stat-value" style="font-size:1.7rem;">2020</div>
+              </div>
+              <div class="stat-card">
+                <div class="stat-label">Especialidade</div>
+                <div class="stat-value" style="font-size:0.9rem;line-height:1.4;">Wildlife<br>& Urban</div>
+              </div>
+              <div class="stat-card" style="border-color:var(--line-gold);background:var(--gold-dim);">
+                <div class="stat-label">Origem</div>
+                <div class="stat-value" style="font-size:0.9rem;line-height:1.4;">Marabá,<br>PA</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact-page" class="page">
+      <div class="section" style="padding-top:120px;">
+        <div class="contact-wrap">
+          <div data-reveal>
+            <div
+              style="font-family:var(--mono);font-size:9px;letter-spacing:0.3em;color:var(--gold);text-transform:uppercase;margin-bottom:12px;">
+              Vamos colaborar</div>
+            <h2 class="contact-title">VAMOS FOTOGRAFAR<em>JUNTOS</em></h2>
+            <p class="contact-sub">Disponível para expedições fotográficas, projetos documentais e licenciamento de
+              imagens em todo o Brasil.</p>
+          </div>
+          <form id="contact-form" data-reveal data-delay="1">
+            <div class="form-grid">
+              <div class="form-group"><label for="fc-nome">Nome Completo</label><input type="text" id="fc-nome"
+                  placeholder="Seu nome" required></div>
+              <div class="form-group"><label for="fc-email">E-mail</label><input type="email" id="fc-email"
+                  placeholder="seu@email.com" required></div>
+            </div>
+            <div class="form-group">
+              <label for="fc-projeto">Tipo de Projeto</label>
+              <select id="fc-projeto">
+                <option value="">Selecione...</option>
+                <option>Expedição Fotográfica</option>
+                <option>Licenciamento de Imagem</option>
+                <option>Projeto Documental</option>
+                <option>Evento / Cobertura</option>
+                <option>Parceria Comercial</option>
+                <option>Outro</option>
+              </select>
+            </div>
+            <div class="form-group"><label for="fc-msg">Mensagem</label><textarea id="fc-msg" rows="5"
+                placeholder="Conte sobre seu projeto..." required></textarea></div>
+            <div style="display:flex;gap:14px;align-items:center;flex-wrap:wrap;">
+              <button type="submit" class="form-btn">Enviar via Gmail →</button>
+            </div>
+            <p id="form-success" class="form-success" style="display:none;">✓ Mensagem preparada! O Gmail abrirá com
+              todos os dados.</p>
+          </form>
+          <div class="contact-channels" data-reveal data-delay="2">
+            <a href="https://wa.me/5594992112727?text=Olá%20Jordão!%20Vim%20pelo%20seu%20portfólio%20e%20gostaria%20de%20conversar"
+              target="_blank" class="contact-channel">
+              <div class="contact-channel-icon" style="color:#25D366;"><svg width="22" height="22" viewBox="0 0 24 24"
+                  fill="currentColor">
+                  <path
+                    d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347zM12 0C5.373 0 0 5.373 0 12c0 2.062.525 4.001 1.446 5.691L0 24l6.473-1.425A11.95 11.95 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 0 1-4.989-1.362l-.357-.212-3.702.815.876-3.606-.233-.371A9.769 9.769 0 0 1 2.182 12C2.182 6.57 6.57 2.182 12 2.182c5.43 0 9.818 4.388 9.818 9.818 0 5.43-4.388 9.818-9.818 9.818z" />
+                </svg></div>
+              <div>
+                <div class="contact-channel-title">WhatsApp</div>
+                <div class="contact-channel-sub">(94) 99211-2727 · Resposta rápida</div>
+              </div>
+            </a>
+            <a href="https://mail.google.com/mail/?view=cm&to=jordao@hnnbl.com.br" target="_blank"
+              class="contact-channel">
+              <div class="contact-channel-icon" style="color:var(--gold);"><svg width="22" height="22"
+                  viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                  stroke-linejoin="round">
+                  <rect x="2" y="4" width="20" height="16" rx="2" />
+                  <polyline points="2,4 12,13 22,4" />
+                </svg></div>
+              <div>
+                <div class="contact-channel-title">E-mail</div>
+                <div class="contact-channel-sub">jordao@hnnbl.com.br</div>
+              </div>
+            </a>
+          </div>
+          <div class="contact-footer-links" data-reveal data-delay="3">
+            <a href="https://mail.google.com/mail/?view=cm&to=jordao@hnnbl.com.br"
+              target="_blank">jordao@hnnbl.com.br</a>
+            <a href="https://www.instagram.com/jordaonunes/" target="_blank">@jordaonunes</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="footer">
+    <div class="footer-logo">JORDÃO NUNES</div>
+    <div class="footer-links">
+      <a href="https://www.instagram.com/jordaonunes/" target="_blank">Instagram</a>
+      <a href="https://mail.google.com/mail/?view=cm&to=jordao@hnnbl.com.br" target="_blank">Email</a>
+      <a href="https://wa.me/5594992112727" target="_blank">WhatsApp</a>
+    </div>
+    <div class="footer-copy">© 2026 Todos os direitos reservados. Desenvolvido por Kauan Comper.</div>
+  </footer>
+
+  <div id="lightbox" class="lightbox" role="dialog" aria-modal="true">
+    <button class="lb-close" id="lb-close" aria-label="Fechar">✕</button>
+    <button class="lb-nav lb-prev" id="lb-prev" aria-label="Anterior">&#8592;</button>
+    <button class="lb-nav lb-next" id="lb-next" aria-label="Próxima">&#8594;</button>
+    <div class="lb-content">
+      <img id="lb-img" src="" alt="">
+      <div class="lb-meta">
+        <span id="lb-cat" class="gal-info-tag"></span>
+        <p id="lb-caption" class="lb-caption-text"></p>
+        <a id="lb-link" href="#" target="_blank" class="lb-instagram-link">Ver no Instagram →</a>
+      </div>
+    </div>
+  </div>
+
+  <script src="src/js/main.js"></script>
+</body>
+
+</html>
