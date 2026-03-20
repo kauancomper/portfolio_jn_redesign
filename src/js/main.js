@@ -103,6 +103,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const progressBar  = document.getElementById('page-progress-bar');
   const scrollTopBtn = document.getElementById('scroll-top');
   const waFab        = document.getElementById('wa-fab');
+  const igFab        = document.getElementById('ig-fab');
 
   window.addEventListener('scroll', () => {
     const scrollY = window.scrollY;
@@ -128,9 +129,11 @@ document.addEventListener('DOMContentLoaded', () => {
     if (scrollY > 300) {
       scrollTopBtn?.classList.add('visible');
       waFab?.classList.add('visible');
+      igFab?.classList.add('visible');
     } else {
       scrollTopBtn?.classList.remove('visible');
       waFab?.classList.remove('visible');
+      igFab?.classList.remove('visible');
     }
   }, { passive: true });
 
