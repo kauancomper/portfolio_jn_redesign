@@ -303,11 +303,12 @@ body{background:var(--night);color:var(--white);font-family:var(--body);font-wei
   .hero-content{padding:0 20px}
   .iso-container{display:none}
   .contact-channels{grid-template-columns:1fr}
+  .contact-channel{flex-direction:column;text-align:center;gap:8px;padding:24px 20px}
   .form-grid{grid-template-columns:1fr}
   .footer,.portfolio-header{padding:44px 20px}
   .portfolio-header{padding-top:90px}
   .stats-grid{grid-template-columns:1fr;gap:2px}
-  .contact-footer-links{flex-wrap:wrap;gap:20px}
+  .contact-footer-links{flex-wrap:wrap;gap:20px;justify-content:center;text-align:center}
 }
 @media(max-width:480px){
   .gallery-grid{grid-template-columns:1fr}
