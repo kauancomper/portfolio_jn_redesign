@@ -16,12 +16,17 @@ except ImportError:
 # =====================================================================
 ANOS_LIMITE = 3
 LIMITE_MAX_POSTS = 30
-INTERVALO_MINUTOS = 360 # (6 horas)
-HEADLESS = True 
+INTERVALO_MINUTOS = 10080         # 7 dias - intervalo normal após um ciclo com sucesso
+INTERVALO_FALHA_BASE_MINUTOS = 10080   # 7 dias - aplicado na 1ª falha de login consecutiva
+INTERVALO_FALHA_INCREMENTO_MINUTOS = 10080  # +7 dias a cada falha consecutiva adicional
+INTERVALO_FALHA_MAX_MINUTOS = 40320    # teto de 28 dias (4 semanas) para o backoff
+JITTER_MAX_MINUTOS = 180          # variação aleatória para não repetir sempre no mesmo horário
+HEADLESS = True
 
 INSTA_USER = os.getenv("INSTA_USER", "jordaonunes")
 INSTA_PASS = os.getenv("INSTA_PASS", "")
 PROXY_SERVER = os.getenv("PROXY_SERVER", "")
+FAILURE_COUNT_FILE = "login_failures.json"
 
 NATURE_KEYWORDS = [
     "natureza", "pássaro", "animal", "flor", "fauna", "flora", "wildlife", "inseto", "réptil", 
@@ -68,6 +73,40 @@ def categorizar_post(caption, alt_texts):
         if k in txt_all: return "social"
             
     return "nature"
+
+# =====================================================================
+# GESTÃO DE FALHAS / BACKOFF
+# =====================================================================
+def ler_falhas_consecutivas():
+    try:
+        with open(FAILURE_COUNT_FILE, "r") as f:
+            return json.load(f).get("consecutive_failures", 0)
+    except (FileNotFoundError, json.JSONDecodeError):
+        return 0
+
+def salvar_falhas_consecutivas(n):
+    with open(FAILURE_COUNT_FILE, "w") as f:
+        json.dump({"consecutive_failures": n}, f)
+
+def calcular_proximo_intervalo(sucesso):
+    falhas = ler_falhas_consecutivas()
+
+    if sucesso:
+        if falhas > 0:
+            print(f"[INFO] Login recuperado após {falhas} falha(s) consecutiva(s). Resetando backoff.")
+        salvar_falhas_consecutivas(0)
+        intervalo = INTERVALO_MINUTOS
+    else:
+        falhas += 1
+        salvar_falhas_consecutivas(falhas)
+        intervalo = min(
+            INTERVALO_FALHA_BASE_MINUTOS + (falhas - 1) * INTERVALO_FALHA_INCREMENTO_MINUTOS,
+            INTERVALO_FALHA_MAX_MINUTOS
+        )
+        print(f"[INFO] {falhas}ª falha de login consecutiva. Aplicando backoff de {intervalo} min.")
+
+    jitter = random.randint(-JITTER_MAX_MINUTOS, JITTER_MAX_MINUTOS)
+    return max(intervalo + jitter, 60)
 
 # =====================================================================
 # CORE DO SCRAPER (VPS OPTIMIZED)
@@ -167,16 +206,27 @@ async def extrair_perfil(username):
     print(f"\n[INFO] Iniciando raspagem do zero: @{username}")
     
     async with async_playwright() as p:
-        args = ["--disable-blink-features=AutomationControlled", "--window-size=1920,1080"]
+        args = [
+            "--disable-blink-features=AutomationControlled",
+            "--window-size=1920,1080",
+            "--disable-dev-shm-usage",
+        ]
         proxy = {"server": PROXY_SERVER} if PROXY_SERVER else None
-        
+
         browser = await p.chromium.launch(headless=HEADLESS, args=args, proxy=proxy)
         session_file = "instagram_session.json"
-        
+
+        context_kwargs = dict(
+            proxy=proxy,
+            viewport={'width': 1920, 'height': 1080},
+            user_agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36",
+            locale="pt-BR",
+            timezone_id="America/Belem",
+        )
         if os.path.exists(session_file):
-            context = await browser.new_context(storage_state=session_file, proxy=proxy, viewport={'width': 1920, 'height': 1080})
+            context = await browser.new_context(storage_state=session_file, **context_kwargs)
         else:
-            context = await browser.new_context(proxy=proxy, viewport={'width': 1920, 'height': 1080})
+            context = await browser.new_context(**context_kwargs)
 
         page = await context.new_page()
         if playwright_stealth:
@@ -184,13 +234,19 @@ async def extrair_perfil(username):
                 from playwright_stealth import stealth
                 await stealth(page)
             except: pass
+        else:
+            # Fallback simples caso a lib de stealth não esteja instalada:
+            # esconde o sinal mais óbvio de automação (navigator.webdriver)
+            await page.add_init_script(
+                "Object.defineProperty(navigator, 'webdriver', {get: () => undefined});"
+            )
 
         # Fluxo de Login
         logado = await efetuar_login_vps(page, context, session_file)
         if not logado:
             print("Encerrando execução por falha no acesso.")
             await browser.close()
-            return
+            return False
 
         # Fluxo de Extração
         print(f"[INFO] Acessando /@{username}/")
@@ -298,12 +354,26 @@ async def extrair_perfil(username):
                 await page.wait_for_timeout(3000)
 
         await browser.close()
-        
+
         path = "src/data/instagram_final_filtrado.json"
+        backup_path = "src/data/instagram_final_filtrado_backup.json"
         os.makedirs(os.path.dirname(path), exist_ok=True)
+
+        if not postagens:
+            print("⚠️ Raspagem não retornou nenhuma foto válida. Mantendo o último JSON salvo (fallback) para o site não ficar sem fotos.")
+            return False
+
+        # Guarda uma cópia do último resultado bom antes de sobrescrever,
+        # para servir de fallback se um ciclo futuro falhar antes de gerar dados novos.
+        if os.path.exists(path):
+            with open(path, "r", encoding="utf-8") as f_old:
+                with open(backup_path, "w", encoding="utf-8") as f_bak:
+                    f_bak.write(f_old.read())
+
         with open(path, "w", encoding="utf-8") as f:
             json.dump(postagens, f, indent=4, ensure_ascii=False)
-        print(f"💾 Arquivo JSON salvo com sucesso!")
+        print(f"💾 Arquivo JSON salvo com sucesso! (backup do anterior em {backup_path})")
+        return True
 
 async def main():
     while True:
@@ -311,13 +381,18 @@ async def main():
             print(f"\n==========================================")
             print(f"⚡ INICIANDO CICLO: {datetime.now().strftime('%H:%M:%S')}")
             print(f"==========================================")
-            await extrair_perfil("jordaonunes")
-            
-            proxima = datetime.now() + timedelta(minutes=INTERVALO_MINUTOS)
-            print(f"\n✅ Ciclo concluído com sucesso!")
-            print(f"⏳ Próxima varredura programada para: {proxima.strftime('%H:%M:%S do dia %d/%m')}\n")
-            
-            await asyncio.sleep(INTERVALO_MINUTOS * 60)
+            sucesso = await extrair_perfil("jordaonunes")
+
+            intervalo_final = calcular_proximo_intervalo(sucesso)
+            proxima = datetime.now() + timedelta(minutes=intervalo_final)
+
+            if sucesso:
+                print(f"\n✅ Ciclo concluído com sucesso!")
+            else:
+                print(f"\n⚠️ Ciclo falhou (login ou raspagem sem resultado).")
+            print(f"⏳ Próxima varredura programada para: {proxima.strftime('%H:%M:%S do dia %d/%m')} (intervalo: {intervalo_final} min)\n")
+
+            await asyncio.sleep(intervalo_final * 60)
         except Exception as e:
             print(f"🔥 ERRO CRÍTICO NO LOOP: {e}")
             await asyncio.sleep(300)
